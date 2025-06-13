@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Kết Nhóm</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #b71c1c, #e57373);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .link-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .link-card:hover {
+            transform: translateY(-5px);
+        }
+        .link-card h2 {
+            color: #b71c1c;
+            margin-top: 0;
+        }
+        .link-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .link-button {
+            display: inline-block;
+            background-color: #b71c1c;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .link-button:hover {
+            background-color: #e57373;
+        }
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .breadcrumb {
+            background: #fff;
+            padding: 16px 32px 8px 32px;
+            font-size: 1em;
+            color: #b71c1c;
+            font-weight: 500;
+        }
+        .breadcrumb a {
+            color: #b71c1c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.2s;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb .sep {
+            color: #888;
+            margin: 0 6px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span class="sep">/</span>
+        <span>Nhóm</span>
+    </nav>
+
+    <div class="header">
+        <h1>Liên Kết Nhóm</h1>
+    </div>
+
+    <div class="container">
+        <div class="link-card">
+            <h2>Nhóm Facebook</h2>
+            <p>Tham gia nhóm Facebook của chúng tôi để cập nhật thông tin mới nhất và tương tác với các thành viên khác.</p>
+            <a href="https://www.facebook.com/groups/2420944838286019" class="link-button" target="_blank">
+                <span class="icon">👥</span>
+                Tham Gia Nhóm Facebook
+            </a>
+            <div class="description">
+                Nhóm Facebook là nơi chia sẻ thông tin, thảo luận và tương tác với cộng đồng.
+            </div>
+        </div>
+
+        <div class="link-card">
+            <h2>Nhóm Chat</h2>
+            <p>Tham gia nhóm chat để trao đổi trực tiếp với các thành viên khác.</p>
+            <a href="https://www.facebook.com/messages/t/29445590701752567" class="link-button" target="_blank">
+                <span class="icon">💬</span>
+                Tham Gia Nhóm Chat
+            </a>
+            <div class="description">
+                Nhóm chat là nơi trao đổi nhanh chóng và trực tiếp với các thành viên.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Thêm hiệu ứng khi click vào nút
+        document.querySelectorAll('.link-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Mở link trong tab mới
+                e.preventDefault();
+                window.open(this.href, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

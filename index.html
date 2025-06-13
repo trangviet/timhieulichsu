@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám phá lịch sử Việt Nam</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-inner">
+                <div class="date">
+                    <i class="fas fa-calendar"></i>
+                    <span></span>
+                </div>
+                <div class="user-auth">
+                    <a href="login.html" id="loginBtn" class="auth-btn">Đăng nhập</a>
+                    <a href="register.html" id="registerBtn" class="auth-btn">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <div class="logo animate fade-in">
+                    <div class="animated-text">
+                        <span class="text-wrapper">
+                            <span class="line line1"></span>
+                            <span class="letters">
+                                <span class="line1">Khám phá lịch sử</span>
+                                <span class="line2">Việt Nam</span>
+                            </span>
+                            <span class="line line2"></span>
+                        </span>
+                    </div>
+                    <p class="subtitle">Nơi lưu giữ và tôn vinh di sản văn hóa</p>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#">Quốc sử Việt <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu historical-periods">
+                            <li>
+                                <a href="pages/dong-lich-su/hong-bang-van-lang.html">
+                                    <span>Hồng Bàng & Văn Lang</span>
+                                </a>
+                            </li>
+                            <li><a href="pages/dong-lich-su/au-lac-nam-viet.html">Âu Lạc & Nam Việt</a></li>
+                            <li><a href="pages/dong-lich-su/bac-thuoc-lan-1.html">Bắc thuộc lần I</a></li>
+                            <li><a href="pages/dong-lich-su/trung-nu-vuong.html">Trưng Nữ Vương</a></li>
+                            <li><a href="pages/dong-lich-su/bac-thuoc-lan-2.html">Bắc thuộc lần II</a></li>
+                            <li><a href="pages/dong-lich-su/nha-ly-nha-trieu.html">Nhà Lý & Nhà Triệu</a></li>
+                            <li><a href="pages/dong-lich-su/bac-thuoc-lan-3.html">Bắc thuộc lần III</a></li>
+                            <li><a href="pages/dong-lich-su/thoi-ky-xay-nen-tu-chu.html">Thời kỳ xây nền tự chủ</a></li>
+                            <li><a href="pages/dong-lich-su/nha-ngo.html">Nhà Ngô</a></li>
+                            <li><a href="pages/dong-lich-su/nha-dinh.html">Nhà Đinh</a></li>
+                            <li><a href="pages/dong-lich-su/nha-tien-le.html">Nhà Tiền Lê</a></li>
+                            <li><a href="pages/dong-lich-su/nha-ly.html">Nhà Lý</a></li>
+                            <li><a href="pages/dong-lich-su/nha-tran.html">Nhà Trần</a></li>
+                            <li><a href="pages/dong-lich-su/nha-ho.html">Nhà Hồ</a></li>
+                            <li><a href="pages/dong-lich-su/nha-hau-tran.html">Nhà Hậu Trần</a></li>
+                            <li><a href="pages/dong-lich-su/bac-thuoc-lan-4.html">Bắc thuộc lần IV</a></li>
+                            <li><a href="pages/dong-lich-su/nha-hau-le.html">Nhà Hậu Lê</a></li>
+                            <li><a href="pages/dong-lich-su/nam-bac-trieu.html">Nam Bắc Triều</a></li>
+                            <li><a href="pages/dong-lich-su/trinh-nguyen-phan-tranh.html">Trịnh Nguyễn Phân Tranh</a></li>
+                            <li><a href="pages/dong-lich-su/nha-tay-son.html">Nhà Tây Sơn</a></li>
+                            <li><a href="pages/dong-lich-su/nha-nguyen.html">Nhà Nguyễn</a></li>
+                            <li><a href="pages/dong-lich-su/phap-thuoc.html">Pháp Thuộc</a></li>
+                            <li><a href="pages/dong-lich-su/viet-nam-dan-chu-cong-hoa.html">Việt Nam Dân Chủ Cộng Hoà</a></li>
+                            <li><a href="pages/dong-lich-su/cong-hoa-xa-hoi-chu-nghia-viet-nam.html">Cộng hoà xã hội chủ nghĩa Việt Nam</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Tư Liệu <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/tu-lieu/quan-su.html">Quân Sự</a></li>
+                            <li><a href="pages/tu-lieu/tac-pham.html">Tác Phẩm</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Nhân Vật <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/nhan-vat/anh-hung-dan-toc.html">Anh Hùng Dân Tộc</a></li>
+                            <li><a href="pages/nhan-vat/danh-nhan-van-hoa.html">Danh nhân văn hóa</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Văn hóa <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/di-tich/di-tich.html">Di tích</a></li>
+                            <li><a href="pages/di-san-van-hoa/di-san-van-hoa.html">Di sản văn hóa</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="sach.html">Sách</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li class="dropdown">
+                        <a href="#">Khác<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="tracnghiem.html">Trắc nghiệm</a></li>
+                            <li><a href="hoidap.html">Hỏi đáp</a></li>
+                            <li><a href="nhom.html">Nhóm</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Parallax -->
+        <section class="hero parallax-section">
+            <div class="parallax-bg"></div>
+            <div class="container">
+                <div class="header-section">
+                    <div class="container">
+                        <h1 class="site-title">Khám phá lịch sử Việt Nam</h1>
+                        <p class="site-subtitle">Từ thời kỳ Hồng Bàng đến ngày nay</p>
+                        <div class="search-box">
+                            <input type="text" placeholder="Tìm kiếm...">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider-icon">
+          <span></span>
+          <i class="fas fa-star"></i>
+          <span></span>
+        </div>
+
+        <!-- Banner Slider -->
+        <section class="banner-slider">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="pages/di-san-van-hoa/di-san-van-hoa.html" style="display:block;width:100%;height:100%">
+                            <img src="https://i.pinimg.com/736x/00/07/1f/00071fa28b4081551127117df7501bf7.jpg" alt="Di sản văn hóa Việt Nam">
+                            <div class="slide-content">
+                                <h2>Di sản văn hóa Việt Nam</h2>
+                                <p>Khám phá những giá trị văn hóa truyền thống</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="pages/nhan-vat/anh-hung-dan-toc.html" style="display:block;width:100%;height:100%">
+                            <img src="https://i.pinimg.com/736x/4c/42/e8/4c42e8fdd909fbf14d254fd9fefd0d22.jpg" alt="Anh hùng dân tộc">
+                            <div class="slide-content">
+                                <h2>Anh hùng dân tộc</h2>
+                                <p>Tìm hiểu về những vị anh hùng đã làm nên lịch sử</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="pages/di-tich/di-tich.html" style="display:block;width:100%;height:100%">
+                            <img src="https://i.pinimg.com/736x/67/ef/76/67ef7643314e986032410cea107a3c1d.jpg" alt="Di tích lịch sử">
+                            <div class="slide-content">
+                                <h2>Di tích lịch sử</h2>
+                                <p>Tham quan những di tích lịch sử nổi tiếng</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <div class="section-divider-icon">
+          <span></span>
+          <i class="fas fa-star"></i>
+          <span></span>
+        </div>
+
+        <!-- Quick Explore Section -->
+        <section class="quick-explore">
+            <div class="container">
+                <h2 class="section-title animate fade-in">Khám phá nhanh</h2>
+                <div class="explore-grid">
+                    <a href="pages/di-tich/di-tich.html" class="explore-card animate fade-in-up">
+                        <i class="fas fa-landmark"></i>
+                        <h3>Di tích lịch sử</h3>
+                    </a>
+                    <a href="pages/nhan-vat/anh-hung-dan-toc.html" class="explore-card animate fade-in-up delay-100">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>Anh hùng dân tộc</h3>
+                    </a>
+                    <a href="sach.html" class="explore-card animate fade-in-up delay-200">
+                        <i class="fas fa-book"></i>
+                        <h3>Sách tham khảo</h3>
+                    </a>
+                    <a href="video.html" class="explore-card animate fade-in-up delay-300">
+                        <i class="fas fa-video"></i>
+                        <h3>Video tài liệu</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider-icon">
+          <span></span>
+          <i class="fas fa-star"></i>
+          <span></span>
+        </div>
+
+
+        <!-- Featured Sections -->
+        <section class="featured-sections">
+            <div class="container">
+                <h2 class="section-title animate fade-in">Các thời kỳ lịch sử</h2>
+                <div class="section-grid">
+                    <div class="section-card animate fade-in-up">
+                        <div class="card-image">
+                            <img src="https://lh5.googleusercontent.com/proxy/jTos2i4EfTkAEp-b-UYiUcEVedfG5XNWwFP33XlQSFNo8VoHYzYMA9ksT0ruxoQ9pP7JGbm23Vabx7WwdCD2ZYK7g_UCZmB1K8qI9N-haVlpzTg6aOo-8AP6FPep51kvbsBej2pL16luIJyB8A" alt="Hồng Bàng & Văn Lang">
+                            <div class="card-overlay">
+                                <span class="period">2879 TCN - 258 TCN</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Hồng Bàng & Văn Lang</h3>
+                            <p>Thời kỳ Hồng Bàng theo truyền thuyết và dã sử cho rằng bắt đầu từ năm 2879 TCN, là thời kỳ đầu tiên trong lịch sử Việt Nam...</p>
+                            <a href="pages/dong-lich-su/hong-bang-van-lang.html" class="btn">Xem thêm</a>
+                        </div>
+                    </div>
+                    <div class="section-card animate fade-in-up delay-100">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/8e/4f/12/8e4f129c90e112572763ad14d39690f0.jpg" alt="Âu Lạc & Nam Việt">
+                            <div class="card-overlay">
+                                <span class="period">257 TCN - 111 TCN</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Âu Lạc & Nam Việt</h3>
+                            <p>Theo hai bộ sử ký Đại Việt sử ký toàn thư và Đại Việt sử lược, thời kỳ này bắt đầu từ khi Thục Phán lên ngôi...</p>
+                            <a href="pages/dong-lich-su/au-lac-nam-viet.html" class="btn">Xem thêm</a>
+                        </div>
+                    </div>
+                    <div class="section-card animate fade-in-up delay-200">
+                        <div class="card-image">
+                            <img src="https://thidaihoc.vn/wp-content/uploads/2021/11/lich-su-viet-nam-ghi-nhan-thoi-gian-cham-dut-thoi-ky-bac-thuoc-lan-thu-nhat-la-nam.jpeg" alt="Bắc thuộc lần I">
+                            <div class="card-overlay">
+                                <span class="period">111 TCN - 40</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Bắc thuộc lần I</h3>
+                            <p>Thời kỳ Bắc thuộc lần thứ nhất trong lịch sử Việt Nam kéo dài từ năm 218 TCN đến năm 40, là thời kỳ đất nước bị đô hộ...</p>
+                            <a href="pages/dong-lich-su/bac-thuoc-lan-1.html" class="btn">Xem thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider-icon">
+          <span></span>
+          <i class="fas fa-star"></i>
+          <span></span>
+        </div>
+
+        <!-- Latest News -->
+        <section class="latest-news">
+            <div class="container">
+                <h2 class="section-title animate fade-in">Tin tức mới nhất</h2>
+                <div class="news-grid">
+                    <div class="news-card animate fade-in-up">
+                        <div class="card-image">
+                            <img src="http://i.pinimg.com/736x/ef/b9/a0/efb9a03d63d56f041f0a26af0a2c2361.jpg" alt="Tin tức 1">
+                            <div class="card-overlay">
+                                <span class="date">01/03/2024</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Khám phá di tích lịch sử mới</h3>
+                            <p class="excerpt">Các nhà khảo cổ học đã phát hiện một di tích lịch sử quan trọng tại khu vực miền Trung...</p>
+                            <a href="https://vnexpress.net/nhung-phat-hien-khao-co-dang-chu-y-nam-2022-4550421.html" class="btn">Đọc thêm</a>
+                        </div>
+                    </div>
+                    <div class="news-card animate fade-in-up delay-100">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/bb/09/6d/bb096d2709448cf9d7b821b7d3f1e892.jpg" alt="Tin tức 2">
+                            <div class="card-overlay">
+                                <span class="date">28/02/2024</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Triển lãm mới về văn hóa Đông Sơn</h3>
+                            <p class="excerpt">Triển lãm giới thiệu về nền văn hóa Đông Sơn rực rỡ với hơn 200 hiện vật quý giá...</p>
+                            <a href="https://hanoimoi.vn/trung-bay-36-hien-vat-tieu-bieu-thoi-ky-dong-son-690894.html" class="btn">Đọc thêm</a>
+                        </div>
+                    </div>
+                    <div class="news-card animate fade-in-up delay-200">
+                        <div class="card-image">
+                            <img src="https://file3.qdnd.vn/data/images/0/2022/05/15/vanchien/dsc_3633.jpg?dpi=150&quality=100&w=870" alt="Tin tức 3">
+                            <div class="card-overlay">
+                                <span class="date">25/02/2024</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Hội thảo về lịch sử Việt Nam</h3>
+                            <p class="excerpt">Hội thảo quốc tế về lịch sử Việt Nam sẽ được tổ chức với sự tham gia của các chuyên gia hàng đầu...</p>
+                            <a href="https://vusta.vn/hoi-khoa-hoc-lich-su-viet-nam-phat-trien-ngay-cang-vung-manh-p90151.html" class="btn">Đọc thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+        <!-- Footer -->
+
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section animate fade-in-up">
+                        <h3>Khám phá lịch sử Việt Nam</h3>
+                        <p>Website chia sẻ kiến thức, tư liệu, hình ảnh về lịch sử và di sản Việt Nam.</p>
+                        <ul>
+                            <li><a href="index.html">Trang chủ</a></li>
+                            <li><a href="pages/di-san-van-hoa/di-san-van-hoa.html">Di sản văn hóa</a></li>
+                            <li><a href="pages/di-tich/di-tich.html">Di tích</a></li>
+                            <li><a href="pages/nhan-vat/anh-hung-dan-toc.html">Anh hùng dân tộc</a></li>
+                            <li><a href="video.html">Video</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-section animate fade-in-up delay-100">
+                        <h3>Liên hệ</h3>
+                        <p><i class="fas fa-envelope"></i> Email: tuvn.24ic@vku.udn.vn</p>
+                        <p><i class="fas fa-phone"></i> Điện thoại: 0708 648 352</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+    
+                    <div class="footer-section animate fade-in-up delay-200">
+                        <h3>Về chúng tôi</h3>
+                        <p>Dự án phát triển bởi sinh viên VKU.<br>
+                        Mọi thông tin đóng góp xin gửi về email trên.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Khám phá lịch sử Việt Nam. Thiết kế bởi nhóm DTV.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cập nhật ngày tháng hiện tại
+            const dateElement = document.querySelector('.top-bar .date span');
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.textContent = today.toLocaleDateString('vi-VN', options);
+
+            // Logic cho menu mobile (burger icon)
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+
+                burger.classList.toggle('toggle');
+            });
+
+            // Logic cho dropdown menu
+            const dropdowns = document.querySelectorAll('.navbar .dropdown');
+
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Ngăn chặn sự kiện click lan ra body
+                    this.classList.toggle('active');
+                });
+            });
+
+            // Đóng dropdown khi click bên ngoài
+            document.addEventListener('click', function(e) {
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.classList.contains('active') && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            });
+
+            // Logic cho Swiper (Banner Slider)
+            const swiper = new Swiper('.swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            // Logic cho hiệu ứng parallax
+            const parallaxBg = document.querySelector('.parallax-bg');
+            if (parallaxBg) {
+                window.addEventListener('scroll', () => {
+                    const scrollPosition = window.pageYOffset;
+                    parallaxBg.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+                });
+            }
+
+            // Chức năng kiểm tra đăng nhập và cập nhật UI
+            function checkLoginStatus() {
+                fetch('check_user_session.php') // Sử dụng tệp PHP đã có để kiểm tra session
+                    .then(response => response.json())
+                    .then(data => {
+                        const userAuthDiv = document.querySelector('.user-auth');
+                        if (data.is_logged_in) {
+                            userAuthDiv.innerHTML = `
+                                <span style="color: white; margin-right: 15px;">Xin chào, ${data.username}</span>
+                                <a href="#" id="logoutBtn" style="text-decoration: none !important; color: white !important; background-color: #e74c3c !important; padding: 8px 15px; border-radius: 5px;">Đăng xuất</a>
+                            `;
+                            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                                e.preventDefault();
+                                fetch('logout.php')
+                                    .then(response => response.json())
+                                    .then(logoutData => {
+                                        if (logoutData.success) {
+                                            alert(logoutData.message);
+                                            window.location.reload(); // Tải lại trang để cập nhật UI
+                                        } else {
+                                            alert('Lỗi đăng xuất: ' + logoutData.message);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Lỗi đăng xuất:', error);
+                                        alert('Đã xảy ra lỗi khi đăng xuất.');
+                                    });
+                            });
+                        } else {
+                            // Giữ nguyên các nút Đăng nhập/Đăng ký nếu chưa đăng nhập
+                            userAuthDiv.innerHTML = `
+                                <a href="login.html" style="text-decoration: none !important; color: white !important; background-color: #c0392b !important; padding: 8px 15px; border-radius: 5px;">Đăng nhập</a>
+                                <a href="register.html" style="text-decoration: none !important; color: white !important; background-color: #c0392b !important; padding: 8px 15px; border-radius: 5px;">Đăng ký</a>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Lỗi kiểm tra trạng thái đăng nhập:', error);
+                        // Trong trường hợp lỗi, vẫn hiển thị các nút đăng nhập/đăng ký để người dùng có thể thử lại
+                        const userAuthDiv = document.querySelector('.user-auth');
+                        userAuthDiv.innerHTML = `
+                            <a href="login.html" style="text-decoration: none !important; color: white !important; background-color: #c0392b !important; padding: 8px 15px; border-radius: 5px;">Đăng nhập</a>
+                            <a href="register.html" style="text-decoration: none !important; color: white !important; background-color: #c0392b !important; padding: 8px 15px; border-radius: 5px;">Đăng ký</a>
+                        `;
+                    });
+            }
+
+            // Gọi hàm khi trang tải
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu Sách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light gray background */
+            color: #333; /* Dark gray text */
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff; /* Thay đổi màu chữ thành trắng */
+            position: relative;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #b71c1c 0%, #8b0000 100%);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Tăng độ đậm của bóng đổ */
+            font-weight: bold; /* Thêm font-weight */
+            letter-spacing: 1px; /* Thêm khoảng cách giữa các chữ */
+            background: linear-gradient(to right, #ffffff, #f0f0f0); /* Thêm gradient cho chữ */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 2s infinite; /* Thêm hiệu ứng shine */
+        }
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0;
+            list-style-type: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .book-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .book-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .book-image-placeholder {
+            width: 150px;
+            height: 225px;
+            background-color: #e57373;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            margin: 0 auto 15px auto;
+            font-size: 0.8em;
+            text-align: center;
+            padding: 5px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .book-item:hover .book-image-placeholder {
+            transform: scale(1.05);
+        }
+        .book-title {
+            font-size: 1.1em;
+            color: #424242;
+            margin: 0 0 10px 0;
+            min-height: 40px;
+            line-height: 1.4;
+        }
+        .book-details {
+            font-size: 0.85em;
+            color: #555;
+            text-align: left;
+            margin-top: 0px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .book-details p {
+            margin: 3px 0;
+            padding: 2px 0;
+        }
+        .book-details strong {
+            color: #333;
+            font-weight: 600;
+        }
+        .price-info {
+            margin-top: 8px !important;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        .selling-price {
+            font-weight: bold;
+            color: #b71c1c;
+            font-size: 1.1em;
+        }
+        .price-range {
+            color: #b71c1c;
+            font-size: 1.25em;
+            font-weight: bold;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px #f8d7da;
+        }
+        .cover-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 0.9em;
+            margin-left: 8px;
+        }
+        .cart-button {
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .cart-button:hover {
+            background-color: #8b0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .cart-button i {
+            font-size: 1.1em;
+        }
+        .shopee-link {
+            color: #ee4d2d;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .shopee-link:hover {
+            text-decoration: underline;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+            }
+        }
+        @media (max-width: 600px) {
+            .book-grid {
+                grid-template-columns: 1fr; /* 1 column for small screens */
+            }
+            header h1 {
+                font-size: 2em;
+            }
+        }
+
+        .search-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            font-size: 0.9em;
+            width: 250px;
+            background-color: rgba(255,255,255,0.9);
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            width: 280px;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: #666;
+        }
+
+        .breadcrumb {
+            background: #fff;
+            padding: 16px 32px;
+            font-size: 1em;
+            color: #b71c1c;
+            font-weight: 500;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .breadcrumb a {
+            color: #b71c1c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.2s;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb .sep {
+            color: #888;
+            margin: 0 6px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span class="sep">/</span>
+        <span>Sách</span>
+    </nav>
+
+    <header>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm sách...">
+        </div>
+        <h1>Giới Thiệu Sách</h1>
+    </header>
+
+    <main>
+        <div class="book-grid">
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/d715afabc3f34518dbffb10808f6ae80.jpg" alt="Lịch Sử Hình Thành Và Phát Triển Vùng Đất Nam Bộ" class="book-image-placeholder">
+                <h3 class="book-title">Lịch Sử Hình Thành Và Phát Triển Vùng Đất Nam Bộ (Từ Khởi Thủy Đến Năm 1945)</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Sách Dân Trí</p>
+                    <p><strong>Tác giả:</strong> Nhiều Tác Giả</p>
+                    <p><strong>Năm XB:</strong> 12/2017</p>
+                    <p><strong>Kích thước:</strong> 15.5 x 23 cm</p>
+                    <p><strong>Số trang:</strong> 696 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 150.000 đ - 200.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Lịch%20Sử%20Hình%20Thành%20Và%20Phát%20Triển%20Vùng%20Đất%20Nam%20Bộ" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/ba2694c04091e702a73d36be7a3664ad.jpg" alt="Địa Lý Học: Tự Nhiên, Kinh Tế & Lịch Sử Nam Kỳ - Tập X" class="book-image-placeholder">
+                <h3 class="book-title">Địa Lý Học: Tự Nhiên, Kinh Tế & Lịch Sử Nam Kỳ - Tập X (1904): Chuyên Khảo Về Tỉnh Cần Thơ</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Trẻ</p>
+                    <p><strong>Tác giả:</strong> Hội nghiên cứu Đông Dương</p>
+                    <p><strong>Dịch giả:</strong> Nguyễn Thanh Long</p>
+                    <p><strong>Năm XB:</strong> 03/2018</p>
+                    <p><strong>Kích thước:</strong> 15.5 x 23 cm</p>
+                    <p><strong>Số trang:</strong> 56 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 18.000 đ - 25.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Địa%20Lý%20Học%20Tự%20Nhiên%20Kinh%20Tế%20Lịch%20Sử%20Nam%20Kỳ%20Tập%20X" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/3d8c327992eac2a8bbbface9f661ef22.jpg" alt="Địa Lý Học: Tự Nhiên, Kinh Tế & Lịch Sử Nam Kỳ - Tập IX" class="book-image-placeholder">
+                <h3 class="book-title">Địa Lý Học: Tự Nhiên, Kinh Tế & Lịch Sử Nam Kỳ - Tập IX (1903): Chuyên Khảo Về Tỉnh Trà Vinh</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Trẻ</p>
+                    <p><strong>Tác giả:</strong> Hội nghiên cứu Đông Dương</p>
+                    <p><strong>Dịch giả:</strong> Nguyễn Thanh Long</p>
+                    <p><strong>Năm XB:</strong> 03/2018</p>
+                    <p><strong>Kích thước:</strong> 15.5 x 23 cm</p>
+                    <p><strong>Số trang:</strong> 64 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 22.000 đ - 30.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Địa%20Lý%20Học%20Tự%20Nhiên%20Kinh%20Tế%20Lịch%20Sử%20Nam%20Kỳ%20Tập%20IX" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/a053d41c80c70a7a594c96c52254c6c6.jpg" alt="Việt Nam Thời Pháp Đô Hộ" class="book-image-placeholder">
+                <h3 class="book-title">Việt Nam Thời Pháp Đô Hộ</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Nhà sách Hoa Sen</p>
+                    <p><strong>Tác giả:</strong> Nguyễn Thế Anh</p>
+                    <p><strong>Năm XB:</strong> 06/2018</p>
+                    <p><strong>Kích thước:</strong> 14.5 x 20.5 cm</p>
+                    <p><strong>Số trang:</strong> 352 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 80.000 đ - 100.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Việt%20Nam%20Thời%20Pháp%20Đô%20Hộ" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/be813d2c195b6a25520aadd953a169ae.jpg" alt="Một Chuyến Du Hành Đến Xứ Nam Hà" class="book-image-placeholder">
+                <h3 class="book-title">Một Chuyến Du Hành Đến Xứ Nam Hà (1792 - 1793)</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Alpha books</p>
+                    <p><strong>Tác giả:</strong> John Barrow (Dịch: Nguyễn Thừa Hỷ)</p>
+                    <p><strong>Năm XB:</strong> 09/2018</p>
+                    <p><strong>Kích thước:</strong> 14 x 20.5 cm</p>
+                    <p><strong>Số trang:</strong> 184 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 70.000 đ - 90.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Một%20Chuyến%20Du%20Hành%20Đến%20Xứ%20Nam%20Hà" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/48eae104b3af99322790dcd1a4aa0bbd.jpg" alt="Chính Sách Giáo Dục Tại Nam Kỳ" class="book-image-placeholder">
+                <h3 class="book-title">Chính Sách Giáo Dục Tại Nam Kỳ Cuối Thế Kỷ 19</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Phanbook</p>
+                    <p><strong>Tác giả:</strong> Etienne François Aymonier (Dịch: Lại Như Bằng)</p>
+                    <p><strong>Năm XB:</strong> 09/2018</p>
+                    <p><strong>Kích thước:</strong> 13 x 20.3 cm</p>
+                    <p><strong>Số trang:</strong> 256 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 80.000 đ - 100.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Chính%20Sách%20Giáo%20Dục%20Tại%20Nam%20Kỳ%20Cuối%20Thế%20Kỷ%2019" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/e356cf2518dcc8e3b8319d832c94dade.jpg" alt="Cuộc Khởi Nghĩa Duy Tân 1916" class="book-image-placeholder">
+                <h3 class="book-title">Cuộc Khởi Nghĩa Duy Tân 1916</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Nhà sách Hoa Sen</p>
+                    <p><strong>Năm XB:</strong> 06/2016</p>
+                    <p><strong>Kích thước:</strong> 14.5 x 20.5 cm</p>
+                    <p><strong>Số trang:</strong> 252 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 50.000 đ - 70.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Cuộc%20Khởi%20Nghĩa%20Duy%20Tân%201916" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/49da9dc835e4684b8c2c4ed7474a3b86.jpg" alt="Kinh Tế & Xã Hội Việt Nam Dưới Các Vua Triều Nguyễn" class="book-image-placeholder">
+                <h3 class="book-title">Kinh Tế & Xã Hội Việt Nam Dưới Các Vua Triều Nguyễn</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Nhà sách Hoa Sen</p>
+                    <p><strong>Tác giả:</strong> Nguyễn Thế Anh</p>
+                    <p><strong>Năm XB:</strong> 12/2016</p>
+                    <p><strong>Kích thước:</strong> 14.5 x 20.5 cm</p>
+                    <p><strong>Số trang:</strong> 304 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 70.000 đ - 90.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Kinh%20Tế%20%26%20Xã%20Hội%20Việt%20Nam%20Dưới%20Các%20Vua%20Triều%20Nguyễn" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/c657fffd92e84d9665f968177f21a734.jpg" alt="Một Số Nhân Vật Lịch Sử Đất Phương Nam" class="book-image-placeholder">
+                <h3 class="book-title">Một Số Nhân Vật Lịch Sử Đất Phương Nam</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Phương Nam</p>
+                    <p><strong>Tác giả:</strong> Nhiều tác giả</p>
+                    <p><strong>Năm XB:</strong> 2017</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 628 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 150.000 đ - 200.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Một%20Số%20Nhân%20Vật%20Lịch%20Sử%20Đất%20Phương%20Nam" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/fd636009476e01c4c88c29c0f43173c2.jpg" alt="Phan Thanh Giản - Trăm Năm Nhìn Lại" class="book-image-placeholder">
+                <h3 class="book-title">Phan Thanh Giản - Trăm Năm Nhìn Lại</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Phương Nam</p>
+                    <p><strong>Tác giả:</strong> Nhiều tác giả</p>
+                    <p><strong>Năm XB:</strong> 2017</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 648 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 150.000 đ - 200.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Phan%20Thanh%20Giản%20-%20Trăm%20Năm%20Nhìn%20Lại" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/5c57fc2ebb987385b2aa77b9ec0185c2.jpg" alt="Chế Độ Thực Dân Pháp Trên Đất Nam Kỳ (1859 - 1954) - Tập 2" class="book-image-placeholder">
+                <h3 class="book-title">Chế Độ Thực Dân Pháp Trên Đất Nam Kỳ (1859 - 1954) - Tập 2</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXBTH TPHCM</p>
+                    <p><strong>Tác giả:</strong> Nguyễn Đình Tư</p>
+                    <p><strong>Năm XB:</strong> 06/2016</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 584 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 132.000 đ - 165.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Chế%20Độ%20Thực%20Dân%20Pháp%20Trên%20Đất%20Nam%20Kỳ%20%281859%20-%201954%29%20-%20Tập%202" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/f9a709ce9a846bedc5d647086dd2a4e0.jpg" alt="Văn Hóa Người Hoa Nam Bộ" class="book-image-placeholder">
+                <h3 class="book-title">Văn Hóa Người Hoa Nam Bộ</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Văn Hóa Văn Nghệ</p>
+                    <p><strong>Tác giả:</strong> Nhiều Tác Giả</p>
+                    <p><strong>Năm XB:</strong> 09/2016</p>
+                    <p><strong>Kích thước:</strong> 14 x 20 cm</p>
+                    <p><strong>Số trang:</strong> 244 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 68.000 đ - 85.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Văn%20Hóa%20Người%20Hoa%20Nam%20Bộ" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/3df1307deacfbb154c12a8faf5e6d818.jpg" alt="Vó Ngựa Và Cánh Cung" class="book-image-placeholder">
+                <h3 class="book-title">Vó Ngựa Và Cánh Cung</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Văn Hóa Văn Nghệ</p>
+                    <p><strong>Tác giả:</strong> Nguyễn Duy Chính</p>
+                    <p><strong>Năm XB:</strong> 10/2016</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 516 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 160.000 đ - 200.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Vó%20Ngựa%20Và%20Cánh%20Cung" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/d0036f2b697a8630c395175af0116283.jpg" alt="Học Sinh Miền Nam - Tư Liệu Và Kỷ Niệm" class="book-image-placeholder">
+                <h3 class="book-title">Học Sinh Miền Nam - Tư Liệu Và Kỷ Niệm</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Văn Hóa Văn Nghệ</p>
+                    <p><strong>Tác giả:</strong> Cao Văn Dũng</p>
+                    <p><strong>Năm XB:</strong> 10/2016</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 872 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa cứng</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 280.000 đ - 350.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Học%20Sinh%20Miền%20Nam%20-%20Tư%20Liệu%20Và%20Kỷ%20Niệm" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/162d88878df7802ec5dc5a3243364337.jpg" alt="Những Mảnh Sử Rời" class="book-image-placeholder">
+                <h3 class="book-title">Những Mảnh Sử Rời</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXBTH TPHCM</p>
+                    <p><strong>Tác giả:</strong> Phạm Hoàng Quân</p>
+                    <p><strong>Năm XB:</strong> 03/2018</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 372 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 92.000 đ - 115.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Những%20Mảnh%20Sử%20Rời" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/7e1aa8f3bd4507f1be6109e05d988e82.jpg" alt="Tài Liệu Mật - Hồi Ký Về Cuộc Chiến Tranh Việt Nam" class="book-image-placeholder">
+                <h3 class="book-title">Tài Liệu Mật - Hồi Ký Về Cuộc Chiến Tranh Việt Nam Và Vụ Tiết Lộ Hồ Sơ Lầu Năm Góc</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Thái Hà</p>
+                    <p><strong>Tác giả:</strong> Daniel Ellsberg</p>
+                    <p><strong>Dịch giả:</strong> Quang Dzoãn</p>
+                    <p><strong>Năm XB:</strong> 03/2018</p>
+                    <p><strong>Kích thước:</strong> 16 x 24 cm</p>
+                    <p><strong>Số trang:</strong> 600 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 143.000 đ - 179.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Tài%20Liệu%20Mật%20-%20Hồi%20Ký%20Về%20Cuộc%20Chiến%20Tranh%20Việt%20Nam%20Và%20Vụ%20Tiết%20Lộ%20Hồ%20Sơ%20Lầu%20Năm%20Góc" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/ef6074047df3774fcc62ef6ec737b416.jpg" alt="Văn Nghệ & Kháng Chiến Qua Ống Kính Trần Văn Lưu" class="book-image-placeholder">
+                <h3 class="book-title">Văn Nghệ & Kháng Chiến Qua Ống Kính Trần Văn Lưu</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> NXB Kim Đồng</p>
+                    <p><strong>Tác giả:</strong> Nguyễn Huy Thắng</p>
+                    <p><strong>Năm XB:</strong> 03/2018</p>
+                    <p><strong>Kích thước:</strong> 23 x 30 cm</p>
+                    <p><strong>Số trang:</strong> 170 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa cứng</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 280.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Văn%20Nghệ%20%26%20Kháng%20Chiến%20Qua%20Ống%20Kính%20Trần%20Văn%20Lưu" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+            <div class="book-item">
+                <img src="https://nguoikesu.com/images/book/0ea282beafcdf3f3aed8505da60d3dca.jpg" alt="Các Triều Đại Việt Nam" class="book-image-placeholder">
+                <h3 class="book-title">Các Triều Đại Việt Nam</h3>
+                <div class="book-details">
+                    <p><strong>NXB:</strong> Huy Hoàng</p>
+                    <p><strong>Tác giả:</strong> Quỳnh Cư</p>
+                    <p><strong>Năm XB:</strong> 09/2017</p>
+                    <p><strong>Kích thước:</strong> 13.5 x 20.5 cm</p>
+                    <p><strong>Số trang:</strong> 420 trang</p>
+                    <p><strong>Hình thức:</strong> Bìa mềm</p>
+                    <p class="price-info">
+                        <span class="price-range"><strong>Giá giao động:</strong> 68.000 đ - 85.000 đ</span>
+                    </p>
+                </div>
+                <a href="https://shopee.vn/search?keyword=Các%20Triều%20Đại%20Việt%20Nam" target="_blank" class="cart-button">
+                    <i class="fas fa-shopping-bag"></i> Mua Ngay
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Hàm tìm kiếm sách
+        function searchBooks() {
+            const searchInput = document.querySelector('.search-container input');
+            const searchTerm = searchInput.value.toLowerCase();
+            const bookItems = document.querySelectorAll('.book-item');
+
+            bookItems.forEach(item => {
+                const title = item.querySelector('.book-title').textContent.toLowerCase();
+                const author = item.querySelector('.book-details').textContent.toLowerCase();
+                const publisher = item.querySelector('.book-details').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || author.includes(searchTerm) || publisher.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Thêm sự kiện tìm kiếm khi nhập
+        document.querySelector('.search-container input').addEventListener('input', searchBooks);
+
+        function buyNow(bookName, price, imageSrc) {
+            // Tạo URL tìm kiếm trên Shopee
+            const searchQuery = encodeURIComponent(bookName);
+            const shopeeUrl = `https://shopee.vn/search?keyword=${searchQuery}`;
+            window.open(shopeeUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

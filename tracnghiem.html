@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc Nghiệm Lịch Sử</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .breadcrumb {
+            background: #fff;
+            padding: 16px 32px 8px 32px;
+            font-size: 1em;
+            color: #b71c1c;
+            font-weight: 500;
+        }
+        .breadcrumb a {
+            color: #b71c1c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.2s;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb .sep {
+            color: #888;
+            margin: 0 6px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #b71c1c, #e57373);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .category-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .category-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            background-color: #f5e0e0;
+            color: #b71c1c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .category-btn:hover {
+            background-color: #b71c1c;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .category-btn.active {
+            background-color: #b71c1c;
+            color: #fff;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #b71c1c;
+            transition: all 0.3s ease;
+        }
+        .question:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .options {
+            margin-left: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid #f5e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        .option:hover {
+            background-color: #f5e0e0;
+            transform: translateY(-2px);
+        }
+        .option.selected {
+            background-color: #b71c1c;
+            color: white;
+            border-color: #b71c1c;
+        }
+        .option.correct {
+            background-color: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        .option.incorrect {
+            background-color: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+        button {
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #e57373;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .question-result {
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        .question-result:hover {
+            transform: translateX(5px);
+        }
+        .question-result.correct {
+            border-left: 5px solid #4caf50;
+        }
+        .question-result.incorrect {
+            border-left: 5px solid #f44336;
+        }
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        .correct .status {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .incorrect .status {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .final-score {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #b71c1c, #e57373);
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .final-score h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #f5e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span class="sep">/</span>
+        <span>Trắc nghiệm</span>
+    </nav>
+
+    <div class="header">
+        <h1>Trắc Nghiệm Lịch Sử Việt Nam</h1>
+    </div>
+
+    <div class="category-selector">
+        <button class="category-btn active" onclick="changeCategory('heroes')">Anh Hùng Dân Tộc Việt Nam</button>
+        <button class="category-btn" onclick="changeCategory('hochiminh')">Chủ Tịch Hồ Chí Minh</button>
+        <button class="category-btn" onclick="changeCategory('events')">Những Sự Kiện Lịch Sử</button>
+    </div>
+
+    <div class="quiz-container">
+        <div id="quiz">
+            <!-- Questions will be inserted here -->
+        </div>
+        <button onclick="checkAnswers()">Kiểm tra kết quả</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const questions = {
+            heroes: [
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Lam Sơn và được phong là Bình Định Vương?",
+                    options: ["Lê Lợi", "Nguyễn Trãi", "Lê Lai", "Đinh Liệt"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người được mệnh danh là 'Đức Thánh Trần' và lãnh đạo quân dân nhà Trần đánh bại quân Nguyên Mông?",
+                    options: ["Trần Hưng Đạo", "Trần Thái Tông", "Trần Thánh Tông", "Trần Nhân Tông"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Tây Sơn và được phong là Bắc Bình Vương?",
+                    options: ["Nguyễn Huệ", "Nguyễn Nhạc", "Nguyễn Lữ", "Trần Quang Diệu"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo chiến dịch Điện Biên Phủ và được phong là Đại tướng đầu tiên của Quân đội Nhân dân Việt Nam?",
+                    options: ["Võ Nguyên Giáp", "Trần Văn Trà", "Lê Trọng Tấn", "Hoàng Văn Thái"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Hai Bà Trưng và được tôn là Nữ vương đầu tiên trong lịch sử Việt Nam?",
+                    options: ["Trưng Trắc", "Trưng Nhị", "Cả hai bà", "Không có ai trong số trên"],
+                    correct: 2
+                },
+                {
+                    question: "Ai là người lãnh đạo chiến dịch Hồ Chí Minh và được phong là Đại tướng?",
+                    options: ["Văn Tiến Dũng", "Lê Đức Anh", "Hoàng Văn Thái", "Lê Trọng Tấn"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Bãi Sậy và được mệnh danh là 'Hùm xám Bãi Sậy'?",
+                    options: ["Nguyễn Thiện Thuật", "Phan Đình Phùng", "Hoàng Hoa Thám", "Nguyễn Trung Trực"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo chiến thắng Bạch Đằng năm 938 và được tôn là 'Vua của các vua'?",
+                    options: ["Ngô Quyền", "Đinh Bộ Lĩnh", "Lê Hoàn", "Lý Công Uẩn"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Mai Thúc Loan và được tôn là 'Mai Hắc Đế'?",
+                    options: ["Mai Thúc Loan", "Phùng Hưng", "Dương Đình Nghệ", "Khúc Thừa Dụ"],
+                    correct: 0
+                },
+                {
+                    question: "Ai là người lãnh đạo cuộc khởi nghĩa Phùng Hưng và được tôn là 'Bố Cái Đại Vương'?",
+                    options: ["Mai Thúc Loan", "Phùng Hưng", "Dương Đình Nghệ", "Khúc Thừa Dụ"],
+                    correct: 1
+                }
+            ],
+            hochiminh: [
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết tác phẩm 'Nhật ký trong tù' trong khoảng thời gian nào?",
+                    options: ["1941-1942", "1942-1943", "1943-1944", "1944-1945"],
+                    correct: 1
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết 'Lời kêu gọi toàn quốc kháng chiến' vào thời điểm nào?",
+                    options: ["19/12/1946", "20/12/1946", "21/12/1946", "22/12/1946"],
+                    correct: 0
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết 'Di chúc' vào năm nào?",
+                    options: ["1967", "1968", "1969", "1970"],
+                    correct: 2
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh thành lập Đảng Cộng sản Việt Nam tại đâu?",
+                    options: ["Hồng Kông", "Quảng Châu", "Thượng Hải", "Bangkok"],
+                    correct: 1
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết tác phẩm 'Đường Kách Mệnh' vào năm nào?",
+                    options: ["1925", "1926", "1927", "1928"],
+                    correct: 2
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết 'Tuyên ngôn Độc lập' tại đâu?",
+                    options: ["Bắc Bộ phủ", "Nhà hát lớn Hà Nội", "Quảng trường Ba Đình", "Phủ Chủ tịch"],
+                    correct: 0
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết tác phẩm 'Sửa đổi lối làm việc' vào năm nào?",
+                    options: ["1946", "1947", "1948", "1949"],
+                    correct: 1
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết 'Thư gửi các cháu thiếu niên nhi đồng' vào dịp nào?",
+                    options: ["Tết Trung thu", "Tết Nguyên đán", "Ngày Quốc tế thiếu nhi", "Ngày khai trường"],
+                    correct: 2
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết tác phẩm 'Nâng cao đạo đức cách mạng' vào năm nào?",
+                    options: ["1968", "1969", "1970", "1971"],
+                    correct: 1
+                },
+                {
+                    question: "Chủ tịch Hồ Chí Minh viết 'Lời kêu gọi đồng bào và chiến sĩ cả nước' vào thời điểm nào?",
+                    options: ["17/7/1966", "17/7/1967", "17/7/1968", "17/7/1969"],
+                    correct: 1
+                }
+            ],
+            events: [
+                {
+                    question: "Chiến thắng Bạch Đằng năm 938 do ai lãnh đạo và đánh bại quân xâm lược nào?",
+                    options: ["Ngô Quyền - quân Nam Hán", "Đinh Bộ Lĩnh - quân Tống", "Lê Hoàn - quân Tống", "Lý Thường Kiệt - quân Tống"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Ngọc Hồi - Đống Đa năm 1789 do ai lãnh đạo và đánh bại quân xâm lược nào?",
+                    options: ["Quang Trung - quân Thanh", "Lê Lợi - quân Minh", "Trần Hưng Đạo - quân Nguyên", "Lý Thường Kiệt - quân Tống"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Chi Lăng - Xương Giang năm 1427 do ai lãnh đạo và đánh bại quân xâm lược nào?",
+                    options: ["Lê Lợi - quân Minh", "Nguyễn Huệ - quân Thanh", "Trần Hưng Đạo - quân Nguyên", "Lý Thường Kiệt - quân Tống"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Rạch Gầm - Xoài Mút năm 1785 do ai lãnh đạo và đánh bại quân xâm lược nào?",
+                    options: ["Nguyễn Huệ - quân Xiêm", "Lê Lợi - quân Minh", "Trần Hưng Đạo - quân Nguyên", "Lý Thường Kiệt - quân Tống"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Điện Biên Phủ năm 1954 do ai lãnh đạo và đánh bại quân xâm lược nào?",
+                    options: ["Võ Nguyên Giáp - quân Pháp", "Trần Văn Trà - quân Mỹ", "Lê Trọng Tấn - quân Pháp", "Hoàng Văn Thái - quân Mỹ"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Đống Đa năm 1789 diễn ra vào ngày nào?",
+                    options: ["30/1/1789", "5/1/1789", "30/1/1788", "5/1/1788"],
+                    correct: 0
+                },
+                {
+                    question: "Chiến thắng Bạch Đằng năm 938 diễn ra vào thời điểm nào?",
+                    options: ["Mùa xuân", "Mùa hạ", "Mùa thu", "Mùa đông"],
+                    correct: 2
+                },
+                {
+                    question: "Chiến thắng Chi Lăng - Xương Giang năm 1427 diễn ra vào thời điểm nào?",
+                    options: ["Mùa xuân", "Mùa hạ", "Mùa thu", "Mùa đông"],
+                    correct: 2
+                },
+                {
+                    question: "Chiến thắng Rạch Gầm - Xoài Mút năm 1785 diễn ra vào thời điểm nào?",
+                    options: ["Mùa xuân", "Mùa hạ", "Mùa thu", "Mùa đông"],
+                    correct: 1
+                },
+                {
+                    question: "Chiến thắng Điện Biên Phủ năm 1954 diễn ra vào thời điểm nào?",
+                    options: ["Mùa xuân", "Mùa hạ", "Mùa thu", "Mùa đông"],
+                    correct: 0
+                }
+            ]
+        };
+
+        let currentCategory = 'heroes';
+        let selectedAnswers = [];
+
+        function changeCategory(category) {
+            currentCategory = category;
+            // Cập nhật trạng thái nút
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Hiển thị câu hỏi mới
+            displayQuestions();
+        }
+
+        function displayQuestions() {
+            const quizDiv = document.getElementById('quiz');
+            quizDiv.innerHTML = '';
+            selectedAnswers = [];
+            
+            const currentQuestions = questions[currentCategory];
+            currentQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <h3>Câu ${index + 1}: ${q.question}</h3>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option" onclick="selectAnswer(${index}, ${i})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                quizDiv.appendChild(questionDiv);
+            });
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            selectedAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`.question:nth-child(${questionIndex + 1}) .option`);
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function checkAnswers() {
+            const currentQuestions = questions[currentCategory];
+            const unansweredQuestions = selectedAnswers.filter(answer => answer === undefined).length;
+            
+            if (unansweredQuestions > 0) {
+                alert(`Bạn còn ${unansweredQuestions} câu chưa trả lời. Vui lòng trả lời hết tất cả các câu hỏi!`);
+                return;
+            }
+
+            let correctCount = 0;
+            const resultDiv = document.getElementById('result');
+            let resultHTML = '<h2>Kết quả chi tiết:</h2>';
+            
+            currentQuestions.forEach((q, index) => {
+                const selectedOption = selectedAnswers[index];
+                const correctOption = q.correct;
+                const isCorrect = selectedOption === correctOption;
+                
+                if (isCorrect) {
+                    correctCount++;
+                }
+
+                resultHTML += `
+                    <div class="question-result ${isCorrect ? 'correct' : 'incorrect'}">
+                        <h3>Câu ${index + 1}: ${q.question}</h3>
+                        <p>Đáp án của bạn: ${q.options[selectedOption]}</p>
+                        ${!isCorrect ? `<p>Đáp án đúng: ${q.options[correctOption]}</p>` : ''}
+                        <p class="status">${isCorrect ? '✓ Đúng' : '✗ Sai'}</p>
+                    </div>
+                `;
+            });
+
+            const percentage = (correctCount / currentQuestions.length) * 100;
+            resultHTML += `
+                <div class="final-score">
+                    <h2>Tổng kết: ${correctCount}/${currentQuestions.length} câu đúng</h2>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${percentage}%"></div>
+                    </div>
+                    <p>${correctCount === currentQuestions.length ? '🎉 Chúc mừng! Bạn đã trả lời đúng tất cả!' : '💪 Hãy cố gắng hơn nữa!'}</p>
+                </div>
+            `;
+
+            resultDiv.innerHTML = resultHTML;
+        }
+
+        // Initialize the quiz
+        displayQuestions();
+    </script>
+</body>
+</html>
